@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🧾 Final Project – Fullstack CRUD Application
+(Next.js 15 + Prisma ORM + MySQL + Authentication)
 
-## Getting Started
+โปรเจกต์นี้เป็นเว็บแอปพลิเคชันสำหรับ จัดการสินค้าแฟชั่น (Product Fashion Management System)
+ประกอบด้วยระบบ Login, Register, Authentication ผ่าน Cookie และระบบ CRUD ของสินค้า
+เป็นงานสำหรับรายวิชา DIT205 – การพัฒนาโปรแกรมประยุกต์
 
-First, run the development server:
+พัฒนาโดย
+Peeraphas Panopas (u6705010)
+มหาวิทยาลัยรังสิต
 
-```bash
+🚀 เทคโนโลยีที่ใช้
+🖥️ Frontend & Backend
+
+Next.js 15 (App Router + Server Components)
+
+React
+
+TypeScript
+
+Tailwind CSS
+
+Next.js Middleware (Auth Protect)
+
+🗄️ Database & ORM
+
+MySQL (ผ่าน XAMPP + phpMyAdmin)
+
+Prisma ORM
+
+🔧 Tools
+
+Node.js
+
+npm
+
+VSCode
+
+Git & GitHub
+
+🔐 ฟีเจอร์ Authentication
+
+สมัครสมาชิก (Register)
+
+ล็อกอิน (Login)
+
+ล็อกเอาต์ (Logout)
+
+จัดการ session ด้วย cookie (session-token)
+
+ป้องกันหน้า /products ไม่ให้คนที่ไม่ได้ login เข้าใช้งาน
+
+เมื่อ login แล้วจะแสดงชื่อผู้ใช้บน Navbar
+
+📦 ฟีเจอร์ของระบบสินค้า (Product Management)
+ฟีเจอร์	รายละเอียด
+Create	เพิ่มสินค้าใหม่ผ่านฟอร์ม
+Read	แสดงรายการสินค้าจากฐานข้อมูลแบบ real-time
+Update	แก้ไขข้อมูลสินค้าแต่ละชิ้น
+Delete	ลบสินค้าได้ทันทีผ่าน API
+Protect Page	เข้าหน้านี้ได้เฉพาะผู้ที่ login แล้วเท่านั้น
+📂 โครงสร้างโปรเจกต์
+src/
+ ├─ app/
+ │   ├─ api/
+ │   │   └─ auth/
+ │   │       ├─ login/route.ts
+ │   │       ├─ register/route.ts
+ │   │       └─ logout/route.ts
+ │   ├─ products/
+ │   │       ├─ page.tsx
+ │   │       ├─ create/page.tsx
+ │   │       └─ [id]/page.tsx
+ │   ├─ layout.tsx
+ │   └─ page.tsx (หน้าแรก)
+ ├─ lib/
+ │    ├─ prisma.ts
+ │    └─ auth.ts
+ ├─ components/
+ │    └─ Navbar.tsx
+ └─ prisma/
+      └─ schema.prisma
+
+🗄️ Prisma Schema (ใช้ใน DB จริง)
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  price     Int
+  image     String?
+  category  String?
+  createdAt DateTime @default(now())
+}
+
+▶️ วิธีติดตั้งและรันโปรเจกต์
+1️⃣ Clone Repository
+git clone https://github.com/peeraphasp67-dot/final-project.git
+cd final-project
+
+2️⃣ ติดตั้ง Dependencies
+npm install
+
+3️⃣ ตั้งค่า Database (.env)
+DATABASE_URL="mysql://root@localhost:3306/fullstack_products"
+
+4️⃣ Prisma Migrate
+npx prisma migrate dev
+
+5️⃣ รันโปรเจกต์
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+จากนั้นเปิดเว็บที่
+👉 http://localhost:3000
